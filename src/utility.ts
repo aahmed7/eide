@@ -538,8 +538,8 @@ export function redirectHost(url: string) {
 export function setProxyHeader(headers: { [key: string]: string | undefined }): { [key: string]: string | undefined } {
 
     try {
-        const proxyUtils = require('./Private/GithubProxy');
-        proxyUtils.setProxyHeader(headers);
+        // const proxyUtils = require('./Private/GithubProxy');
+        // proxyUtils.setProxyHeader(headers);
     } catch (error) {
         // ignore error
     }

@@ -101,7 +101,7 @@ export async function activate(context: vscode.ExtensionContext) {
     // init eide components
     const done = await InitComponents(context);
     if (!done) {
-        vscode.window.showErrorMessage(`${ERROR} : Install eide binaries failed !, You can download offline [vsix package](https://github.com/github0null/eide/releases) and install it !`);
+        vscode.window.showErrorMessage(`${ERROR} : Install eide binaries failed !, You can download offline [vsix package](https://github.com/aahmed7/eide/releases) and install it !`);
         return;
     }
 
@@ -468,7 +468,7 @@ async function tryUpdateBinaries(binFolder: File, localVer?: string, notConfirm?
 
     const getVersionFromRepo = async (): Promise<string | Error | undefined> => {
         try {
-            const url = `https://api.github.com/repos/github0null/eide-resource/contents/binaries/${platform.getRuntimeId()}/VERSION`;
+            const url = `https://api.github.com/repos/aahmed7/eide-resource/contents/binaries/${platform.getRuntimeId()}/VERSION`;
             const cont = await utility.requestTxt(utility.redirectHost(url));
             if (typeof cont != 'string') return cont;
             let obj: any = undefined;
@@ -482,7 +482,7 @@ async function tryUpdateBinaries(binFolder: File, localVer?: string, notConfirm?
 
     const getAvailableBinariesVersions = async (): Promise<string[] | Error | undefined> => {
         try {
-            const url = `https://api.github.com/repos/github0null/eide-resource/contents/binaries/${platform.getRuntimeId()}`;
+            const url = `https://api.github.com/repos/aahmed7/eide-resource/contents/binaries/${platform.getRuntimeId()}`;
             const fList = await utility.readGithubRepoFolder(utility.redirectHost(url));
             if (fList instanceof Error) throw fList;
             return fList.filter(f => f.name.startsWith('bin-'))
@@ -547,7 +547,7 @@ async function tryUpdateBinaries(binFolder: File, localVer?: string, notConfirm?
     if (checkBinFolder(binFolder) && preinstallVersion) {
 
         if (!notConfirm) {
-            const msg = `New update for eide binaries, version: '${preinstallVersion}', [ChangeLog](https://github.com/github0null/eide-resource/pulls?q=is%3Apr+is%3Aclosed), install now ?`;
+            const msg = `New update for eide binaries, version: '${preinstallVersion}', [ChangeLog](https://github.com/aahmed7/eide-resource/pulls?q=is%3Apr+is%3Aclosed), install now ?`;
             const sel = await vscode.window.showInformationMessage(msg, 'Yes', 'Later');
             if (sel != 'Yes') { return true; } // user canceled
         }
@@ -566,8 +566,8 @@ async function tryInstallBinaries(binFolder: File, binVersion: string): Promise<
 
     // binaries download site
     let downloadSites: string[] = [
-        `https://raw-github.em-ide.com/github0null/eide-resource/master/binaries/${platform.getRuntimeId()}/bin-${binVersion}.${binType}`,
-        `https://raw.githubusercontent.com/github0null/eide-resource/master/binaries/${platform.getRuntimeId()}/bin-${binVersion}.${binType}`
+        `https://raw-github.em-ide.com/aahmed7/eide-resource/master/binaries/${platform.getRuntimeId()}/bin-${binVersion}.${binType}`,
+        `https://raw.githubusercontent.com/aahmed7/eide-resource/master/binaries/${platform.getRuntimeId()}/bin-${binVersion}.${binType}`
     ];
 
     // random order
@@ -1062,10 +1062,10 @@ async function InitComponents(context: vscode.ExtensionContext): Promise<boolean
 
     // register telemetry hook if user enabled
     try {
-        if (settingManager.isEnableTelemetry()) {
-            const TelemetryTask = require('./Private/TelemetryTask');
-            TelemetryTask.registerTelemetryHook();
-        }
+        // if (settingManager.isEnableTelemetry()) {
+        //     const TelemetryTask = require('./Private/TelemetryTask');
+        //     TelemetryTask.registerTelemetryHook();
+        // }
     } catch (error) {
         // ignore error
     }
